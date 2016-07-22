@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:key="about"
+        android:title="KissAnimeSK"
+        android:summary="v1.0"
+        android:layout="@layout/prefimage">
+    </Preference>
+    <PreferenceCategory
+        android:title="Author"
+        android:key="pref_key_storage_settings">
+
+        <Preference
+            android:key="about"
+            android:title="Harsha Raghuram"
+            android:summary="raghunarnindi002@gmail.com">
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Build Version"
+        android:key="pref_key_storage_settings">
+
+        <Preference
+            android:key="about"
+            android:title="1.0v"
+            android:summary="BN1">
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Build Date"
+        android:key="pref_key_storage_settings">
+
+        <Preference
+            android:key="about"
+            android:title="21072016">
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Faq 1"
+        android:key="pref_key_storage_settings">
+
+        <Preference
+            android:key="Faq 1"
+            android:title="Cannot see any videos after clicking an Anime Title ?"
+            android:summary="Just scroll down a lil."
+            android:layout="@layout/preftest">
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Faq 2"
+        android:key="pref_key_storage_settings">
+
+        <Preference
+            android:key="Faq 2"
+            android:title="How to open video with native video system app (MX Player) ?"
+            android:summary="Long-Hold-Click on choosen resolution."
+            android:layout="@layout/preftest">
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

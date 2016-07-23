@@ -1,8 +1,10 @@
 package net.cloudapp.testh.sk.kissanimesk;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,16 +17,23 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class MainActivity extends AppCompatActivity {
 
     WebView myWebView;
-
     private ActionMode mActionMode = null;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +45,67 @@ public class MainActivity extends AppCompatActivity {
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        myWebView.setWebViewClient(new WebViewClient());
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        final Context context = this;
+        myWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String urlraw) {
+                if( !urlraw.contains("kissanime.to"))
+                {
+                    final String threadurlraw = urlraw;
+                    Toast.makeText(context, "Loading ...", Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    Uri uri = Uri.parse(threadurlraw);
+                    i.setDataAndType(uri, "video/*");
+                    startActivity(i);
+
+                    /*Thread thread = new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            try {
+                                HttpURLConnection connection = null;
+                                try {
+                                    Log.v("Hmm", "THread started and Url Connectingg ....");
+                                    URL url = new URL(threadurlraw);
+                                    connection = (HttpURLConnection) url.openConnection();
+                                    connection.setRequestMethod("HEAD");
+                                    connection.connect();
+                                    Log.v("Hmm", "... and Url comp[leted ....");
+
+                                    String contentType = connection.getContentType();
+                                    Log.v("Hmm", "ContentType" + contentType);
+                                    if( contentType.substring(0,5).contains("video"))
+                                    {
+                                        Intent i = new Intent(Intent.ACTION_VIEW);
+                                        Uri uri = Uri.parse(threadurlraw);
+                                        i.setDataAndType(uri, "video/*");
+                                        startActivity(i);
+                                    }
+                                    Log.v("Hmm","Thread completed...");
+                                } catch (java.net.MalformedURLException e) {
+
+                                } catch (java.net.ProtocolException e) {
+
+                                } catch (java.io.IOException e) {
+
+                                }
+                            } catch (Exception e) {
+                                Log.e("Hmm", e.getMessage());
+                            }
+                        }
+                    });
+                    thread.start();*/
+                    return true;
+                }
+                return false;
+            }
+        });
 
         myWebView.setLongClickable(true);
         myWebView.loadUrl("http://kissanime.to/m/");

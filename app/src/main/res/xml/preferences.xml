@@ -3,7 +3,7 @@
     <Preference
         android:key="about"
         android:title="KissAnimeSK"
-        android:summary="v1.0"
+        android:summary="@string/sk_st_versionname"
         android:layout="@layout/prefimage">
     </Preference>
     <PreferenceCategory
@@ -11,7 +11,7 @@
         android:key="pref_key_storage_settings">
 
         <Preference
-            android:key="about"
+            android:key="email"
             android:title="Harsha Raghuram"
             android:summary="raghunarnindi002@gmail.com">
         </Preference>
@@ -22,8 +22,8 @@
 
         <Preference
             android:key="about"
-            android:title="1.0v"
-            android:summary="BN1">
+            android:title="@string/sk_st_versionname"
+            android:summary="@string/sk_st_versioncode">
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory
@@ -31,8 +31,26 @@
         android:key="pref_key_storage_settings">
 
         <Preference
-            android:key="about"
-            android:title="21072016">
+            android:key="bd"
+            android:title="@string/sk_builddate">
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="GitHub Repo"
+        android:key="pref_key_storage_settings">
+
+        <Preference
+            android:key="repo"
+            android:title="https://github.com/ShootingKing-AM/KissAnimeSK">
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Report Issues Here"
+        android:key="pref_key_storage_settings">
+
+        <Preference
+            android:key="issues"
+            android:title="https://github.com/ShootingKing-AM/KissAnimeSK/issues">
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory
@@ -47,13 +65,12 @@
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="Faq 2"
+        android:title="About Tip!"
         android:key="pref_key_storage_settings">
 
         <Preference
-            android:key="Faq 2"
-            android:title="How to open video with native video system app (MX Player) ?"
-            android:summary="Long-Hold-Click on choosen resolution."
+            android:key="abouttip"
+            android:title="Click on Email, or Github links and see the magic happen !"
             android:layout="@layout/preftest">
         </Preference>
     </PreferenceCategory>

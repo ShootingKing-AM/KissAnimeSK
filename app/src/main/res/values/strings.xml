@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">KissAnimeSK</string>
     <string name="action_info">About</string>
+    <string name="action_home">Home</string>
 
-    <string name="sk_versionname">1.1</string>
-    <string name="sk_versioncode">3</string>
+    <string name="sk_versionname">1.2</string>
+    <string name="sk_versioncode">4</string>
 
-    <string name="sk_st_versionname">v1.1</string>
-    <string name="sk_st_versioncode">BN3</string>
-    <string name="sk_builddate">27072016</string>
+    <string name="sk_st_versionname">v1.2</string>
+    <string name="sk_st_versioncode">BN4</string>
+    <string name="sk_builddate">17092016</string>
 </resources>

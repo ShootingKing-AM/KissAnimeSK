@@ -1,5 +1,6 @@
 package net.cloudapp.testh.sk.kissanimesk;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -18,12 +19,17 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     WebView myWebView;
-    private ActionMode mActionMode = null;
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    Map<String, String> extraHeaders = new HashMap<String, String>();
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +38,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         myWebView = (WebView) findViewById(R.id.webview);
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        WebSettings webSettings = null;
+        if (myWebView != null)
+        {
+            webSettings = myWebView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+        }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -47,89 +57,24 @@ public class MainActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String urlraw) {
                 if( !urlraw.contains("kissanime.to"))
                 {
-                    final String threadurlraw = urlraw;
                     Toast.makeText(context, "Loading ...", Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent(Intent.ACTION_VIEW);
-                    Uri uri = Uri.parse(threadurlraw);
+                    Uri uri = Uri.parse(urlraw);
                     i.setDataAndType(uri, "video/*");
                     startActivity(i);
-
-                    /*Thread thread = new Thread(new Runnable(){
-                        @Override
-                        public void run() {
-                            try {
-                                HttpURLConnection connection = null;
-                                try {
-                                    Log.v("Hmm", "THread started and Url Connectingg ....");
-                                    URL url = new URL(threadurlraw);
-                                    connection = (HttpURLConnection) url.openConnection();
-                                    connection.setRequestMethod("HEAD");
-                                    connection.connect();
-                                    Log.v("Hmm", "... and Url comp[leted ....");
-
-                                    String contentType = connection.getContentType();
-                                    Log.v("Hmm", "ContentType" + contentType);
-                                    if( contentType.substring(0,5).contains("video"))
-                                    {
-                                        Intent i = new Intent(Intent.ACTION_VIEW);
-                                        Uri uri = Uri.parse(threadurlraw);
-                                        i.setDataAndType(uri, "video/*");
-                                        startActivity(i);
-                                    }
-                                    Log.v("Hmm","Thread completed...");
-                                } catch (java.net.MalformedURLException e) {
-
-                                } catch (java.net.ProtocolException e) {
-
-                                } catch (java.io.IOException e) {
-
-                                }
-                            } catch (Exception e) {
-                                Log.e("Hmm", e.getMessage());
-                            }
-                        }
-                    });
-                    thread.start();*/
-                    return true;
                 }
-                return false;
+                else
+                {
+                    view.loadUrl(urlraw, extraHeaders);
+                }
+                return true;
             }
         });
 
         myWebView.setLongClickable(true);
-        myWebView.loadUrl("http://kissanime.to/m/");
-    }
-
-    @Override
-    public void onActionModeStarted(ActionMode mode) {
-        if (mActionMode == null) {
-            mActionMode = mode;
-            Menu menu = mode.getMenu();
-            menu.clear();
-            mActionMode.finish();
-
-            WebView.HitTestResult result = myWebView.getHitTestResult();
-
-            String url;
-            if(result.getType()== WebView.HitTestResult.SRC_ANCHOR_TYPE )
-            {
-                url = result.getExtra();
-
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                Uri uri = Uri.parse(url);
-                i.setDataAndType(uri, "video/*");
-                startActivity(i);
-            }
-        }
-
-        super.onActionModeStarted(mode);
-    }
-
-    @Override
-    public void onActionModeFinished(ActionMode mode) {
-        mActionMode = null;
-        super.onActionModeFinished(mode);
+        extraHeaders.put("X-Requested-With", "XMLHttpRequest");
+        myWebView.loadUrl("http://kissanime.to/m/", extraHeaders);
     }
 
     @Override
@@ -146,13 +91,18 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_info) {
 
             Intent newIntent = new Intent(this, CreditPrefs.class);
             newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.startActivity(newIntent);
 
+            return true;
+        }
+        else if ( id == R.id.action_home)
+        {
+            myWebView.loadUrl("http://kissanime.to/m/", extraHeaders);
+            Toast.makeText(this, "Loading Home...", Toast.LENGTH_SHORT).show();
             return true;
         }
 

@@ -3,10 +3,10 @@
     <string name="action_info">About</string>
     <string name="action_home">Home</string>
 
-    <string name="sk_versionname">1.2</string>
-    <string name="sk_versioncode">4</string>
+    <string name="sk_versionname">1.2.1</string>
+    <string name="sk_versioncode">5</string>
 
-    <string name="sk_st_versionname">v1.2</string>
-    <string name="sk_st_versioncode">BN4</string>
-    <string name="sk_builddate">17092016</string>
+    <string name="sk_st_versionname">v1.2.1</string>
+    <string name="sk_st_versioncode">BN5</string>
+    <string name="sk_builddate">18092016</string>
 </resources>

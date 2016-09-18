@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         myWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String urlraw) {
-                if( !urlraw.contains("kissanime.to"))
+                if( urlraw.contains("redirector.googlevideo.com"))
                 {
                     Toast.makeText(context, "Loading ...", Toast.LENGTH_SHORT).show();
 
@@ -69,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
                     view.loadUrl(urlraw, extraHeaders);
                 }
                 return true;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url)
+            {
+                if( !url.contains("kissanime.to/m") && !url.contains("kissanime.to/M"))
+                {
+                    view.loadUrl("http://kissanime.to/m/", extraHeaders);
+                }
             }
         });
 

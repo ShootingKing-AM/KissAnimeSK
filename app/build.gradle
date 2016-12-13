@@ -8,8 +8,8 @@ android {
         applicationId "net.cloudapp.testh.sk.kissanimesk"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 4
-        versionName "1.2"
+        versionCode 6
+        versionName "1.2.2"
     }
     buildTypes {
         release {
@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            debuggable false
+            debuggable true
         }
     }
 }

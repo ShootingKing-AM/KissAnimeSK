@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     WebView myWebView;
     private FirebaseAnalytics mFirebaseAnalytics;
+    private static final java.lang.String INST_DATA_URL = "net.cloudapp.testh.sk.kissanimesk.url";
+    private static final java.lang.String INST_DATA_SCROLLY = "net.cloudapp.testh.sk.kissanimesk.posy";
 
     Map<String, String> extraHeaders = new HashMap<String, String>();
 
@@ -128,5 +132,22 @@ public class MainActivity extends AppCompatActivity {
         // If it wasn't the Back key or there's no web page history, bubble up to the default
         // system behavior (probably exit the activity)
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+        outState.putString(INST_DATA_URL, myWebView.getUrl());
+        outState.putInt(INST_DATA_SCROLLY, myWebView.getScrollY());
+        Log.v("KissAnimeSK", "Save " + myWebView.getUrl() + ", " + myWebView.getScrollY());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState (Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        myWebView.loadUrl(savedInstanceState.getString(INST_DATA_URL), extraHeaders);
+        myWebView.setScrollY(savedInstanceState.getInt(INST_DATA_SCROLLY));
+
+        Log.v("KissAnimeSK", "Set " + savedInstanceState.getString(INST_DATA_URL) + ", " + savedInstanceState.getInt(INST_DATA_SCROLLY));
     }
 }

@@ -1,8 +1,13 @@
-# KissAnimeSK v1.2.1
-*Last updated 18/9/2016*
+# KissAnimeSK v1.3
+*Last updated 20/12/2016*
 
 Android app for kissanime.to
 
+- v1.3
+  * Small fixes to compensate redirection of KA to .ru domain.
+- v1.2.2
+  * Make default App orientation to Portrait
+  * Save and Restore Current Viewing URL, onResume() and onPause()
 - v1.2.1
   * Using more specific test case to create video intents. 
   * Fixing App loading Desktop Kissanime.to site.

@@ -78,7 +78,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url)
             {
-                if( !url.contains("kissanime.to/m") && !url.contains("kissanime.to/M"))
+                if( !url.contains("kissanime.to/m")
+                        && !url.contains("kissanime.to/M")
+                        && !url.contains("kissanime.ru/M")
+                        && !url.contains("kissanime.ru/m"))
                 {
                     view.loadUrl("http://kissanime.to/m/", extraHeaders);
                 }

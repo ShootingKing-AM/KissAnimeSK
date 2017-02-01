@@ -1,5 +1,5 @@
-# KissAnimeSK v1.3
-*Last updated 20/12/2016*
+# KissAnimeSK v1.4
+*Last updated 02/1/2017*
 
 Android app for kissanime.to
 

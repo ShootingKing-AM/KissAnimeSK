@@ -54,24 +54,12 @@
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="Faq 1"
+        android:title="Latest App Download Link"
         android:key="pref_key_storage_settings">
 
         <Preference
-            android:key="Faq 1"
-            android:title="Cannot see any videos after clicking an Anime Title ?"
-            android:summary="Just scroll down a lil."
-            android:layout="@layout/preftest">
-        </Preference>
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:title="About Tip!"
-        android:key="pref_key_storage_settings">
-
-        <Preference
-            android:key="abouttip"
-            android:title="Click on Email, or Github links and see the magic happen !"
-            android:layout="@layout/preftest">
+            android:key="link"
+            android:title="https://github.com/ShootingKing-AM/KissAnimeSK/releases/latest">
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

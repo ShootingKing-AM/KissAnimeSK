@@ -58,5 +58,17 @@ public class CreditPrefs extends PreferenceActivity {
                 return true;
             }
         });
+
+        myPref = (Preference) findPreference("link");
+        myPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            public boolean onPreferenceClick(Preference preference) {
+
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                Uri uri = Uri.parse("https://github.com/ShootingKing-AM/KissAnimeSK/releases/latest");
+                i.setData(uri);
+                startActivity(i);
+                return true;
+            }
+        });
     }
 }

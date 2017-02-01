@@ -14,6 +14,8 @@ import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.CookieManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,6 +23,8 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         myWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String urlraw) {
-                if( urlraw.contains("redirector.googlevideo.com"))
+                if( urlraw.contains("googlevideo.com"))
                 {
                     Toast.makeText(context, "Loading ...", Toast.LENGTH_SHORT).show();
 
@@ -85,6 +89,19 @@ public class MainActivity extends AppCompatActivity {
                 {
                     view.loadUrl("http://kissanime.to/m/", extraHeaders);
                 }
+
+                String baseUrl = "http://kissanime.to/";
+                try
+                {
+                    URL durl = new URL(myWebView.getUrl());
+                    baseUrl = durl.getProtocol() + "://" + durl.getHost();
+                }
+                catch (MalformedURLException e)
+                { }
+
+                String cookieString = "playerTypeMobile=skPlayer; path=/";
+                //Log.v("CookieTesting", CookieManager.getInstance().getCookie(baseUrl).toString());
+                CookieManager.getInstance().setCookie(baseUrl, cookieString);
             }
         });
 

@@ -3,6 +3,10 @@
 
 Android app for kissanime.to
 
+- v1.4
+  * Fixed minor issues.
+  * Enforcing cookie to avoid site js binding onClick handles to video links.
+  * Added app download link in About section.
 - v1.3
   * Small fixes to compensate redirection of KA to .ru domain.
 - v1.2.2
